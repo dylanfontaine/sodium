@@ -18,7 +18,7 @@ use ParagonIE\Halite\Symmetric\Crypto;
  * @EncryptionMethod(
  *   id = "halite",
  *   title = @Translation("Halite (Libsodium)"),
- *   description = "Uses Halite, which relies on Libsodium for its cryptographic operations.",
+ *   description = "Uses Halite, which relies on Libsodium for operations.",
  *   key_type = {"encryption"}
  * )
  */
@@ -42,7 +42,7 @@ class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionM
    */
   public function encrypt($text, $key, $options = array()) {
     $encryption_key = new EncryptionKey($key);
-    return Crypto::encrypt($text, $encryption_key, true);
+    return Crypto::encrypt($text, $encryption_key, TRUE);
   }
 
   /**
@@ -50,7 +50,7 @@ class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionM
    */
   public function decrypt($text, $key, $options = array()) {
     $encryption_key = new EncryptionKey($key);
-    return Crypto::decrypt($text, $encryption_key, true);
+    return Crypto::decrypt($text, $encryption_key, TRUE);
   }
 
 }
