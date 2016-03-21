@@ -1,0 +1,10 @@
+{
+  "name": "drupal/halite",
+  "description": "Provides an encryption method for Encrypt that uses Halite and Libsodium.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/halite",
+  "require": {
+    "paragonie/halite": "1.5.*"
+  }
+}
