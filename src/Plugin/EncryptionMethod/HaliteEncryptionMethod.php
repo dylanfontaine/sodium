@@ -40,7 +40,7 @@ class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionM
   /**
    * {@inheritdoc}
    */
-  public function encrypt($text, $key, $options = array()) {
+  public function encrypt($text, $key) {
     $encryption_key = new EncryptionKey($key);
     return Crypto::encrypt($text, $encryption_key, TRUE);
   }
@@ -48,7 +48,7 @@ class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionM
   /**
    * {@inheritdoc}
    */
-  public function decrypt($text, $key, $options = array()) {
+  public function decrypt($text, $key) {
     $encryption_key = new EncryptionKey($key);
     return Crypto::decrypt($text, $encryption_key, TRUE);
   }
