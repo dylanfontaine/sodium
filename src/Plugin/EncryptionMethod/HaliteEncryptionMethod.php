@@ -52,7 +52,7 @@ class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       drupal_set_message($this->t('Encryption failed because the key is not the correct size.'), 'error');
       return FALSE;
     }
-    
+
     // Encrypt the data.
     try {
       $encrypted_data = Crypto::encrypt($text, $encryption_key, TRUE);
@@ -73,7 +73,8 @@ class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionM
     // Create the key object.
     try {
       $encryption_key = new EncryptionKey($key);
-    } catch (CryptoException\InvalidKey $e) {
+    }
+    catch (CryptoException\InvalidKey $e) {
       drupal_set_message($this->t('Decryption failed because the key is not the correct size.'), 'error');
       return FALSE;
     }
