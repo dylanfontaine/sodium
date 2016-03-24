@@ -1,13 +1,14 @@
 ## Overview
 
-The Sodium Encryption module for Drupal provides an encryption method for
-the Encrypt module that allows symmetric encryption and decryption of data
-using Libsodium. PHP integration is provided by the Halite library.
+The Sodium module for Drupal provides an encryption method for the Encrypt
+module that allows symmetric encryption and decryption of data using the
+Sodium (libsodium) software library. PHP integration is provided by the 
+Halite library.
 
 ## Requirements
 
 * PHP 5.6 or later
-* [Libsodium library](https://github.com/jedisct1/libsodium)
+* [Sodium (libsodium) library](https://github.com/jedisct1/libsodium)
 * [Libsodium PHP extension](https://github.com/jedisct1/libsodium-php)
 * [Halite PHP library](https://github.com/paragonie/halite)
 * [Encrypt module](https://www.drupal.org/project/encrypt)
