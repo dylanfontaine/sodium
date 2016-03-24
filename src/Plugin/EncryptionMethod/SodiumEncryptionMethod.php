@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\halite\Plugin\EncryptionMethod\HaliteEncryptionMethod.
+ * Contains \Drupal\sodium\Plugin\EncryptionMethod\SodiumEncryptionMethod.
  */
 
-namespace Drupal\halite\Plugin\EncryptionMethod;
+namespace Drupal\sodium\Plugin\EncryptionMethod;
 
 use Drupal\encrypt\EncryptionMethodInterface;
 use Drupal\encrypt\Plugin\EncryptionMethod\EncryptionMethodBase;
@@ -14,16 +14,16 @@ use ParagonIE\Halite\Symmetric\Crypto;
 use ParagonIE\Halite\Alerts as CryptoException;
 
 /**
- * Adds an encryption method that uses the Halite PHP library.
+ * Adds an encryption method that uses Libsodium for cryptographic operations.
  *
  * @EncryptionMethod(
- *   id = "halite",
- *   title = @Translation("Halite (Libsodium)"),
- *   description = "Uses Halite, which relies on Libsodium for operations.",
+ *   id = "sodium",
+ *   title = @Translation("Sodium"),
+ *   description = "Uses Libsodium for cryptographic operations.",
  *   key_type = {"encryption"}
  * )
  */
-class HaliteEncryptionMethod extends EncryptionMethodBase implements EncryptionMethodInterface {
+class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionMethodInterface {
 
   /**
    * {@inheritdoc}

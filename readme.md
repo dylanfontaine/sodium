@@ -1,10 +1,8 @@
 ## Overview
 
-The Halite module for Drupal provides integration with the Halite PHP
-library, which is a high-level cryptography interface that uses the
-Libsodium library for its cryptographic operations. The module defines
-an encryption method for the Encrypt module that allows symmetric
-encryption and decryption using Libsodium.
+The Sodium Encryption module for Drupal provides an encryption method for
+the Encrypt module that allows symmetric encryption and decryption of data
+using Libsodium. PHP integration is provided by the Halite library.
 
 ## Requirements
 
@@ -21,7 +19,7 @@ It sounds more complicated than it actually is. Here's more information
 about installing the Libsodium library and Libsodium PHP extension:
 [https://paragonie.com/book/pecl-libsodium/read/00-intro.md#installing-libsodium](https://paragonie.com/book/pecl-libsodium/read/00-intro.md#installing-libsodium)
 
-## Using Halite in Encrypt
+## Using Sodium in Encrypt
 
 Once everything is installed and operational, do the following:
 
@@ -48,7 +46,7 @@ Once everything is installed and operational, do the following:
    * Click "Save"
 3. Create an encryption profile using the Encrypt module (at 
    /admin/config/system/encryption/profiles/add)
-   * Select "Halite (Libsodium)" for the encryption method
+   * Select "Sodium" for the encryption method
    * Select the name of the key definition you created in step 2
    * Click "Save"
 4. Test your encryption by selecting "Test" under "Operations" for the

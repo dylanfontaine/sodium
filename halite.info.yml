@@ -1,7 +1,0 @@
-name: Halite
-description: "Provides support for encryption using Halite and Encrypt."
-core: 8.x
-type: module
-package: Security
-dependencies:
-  - encrypt
