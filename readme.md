@@ -20,6 +20,11 @@ It sounds more complicated than it actually is. Here's more information
 about installing the Libsodium library and Libsodium PHP extension:
 [https://paragonie.com/book/pecl-libsodium/read/00-intro.md#installing-libsodium](https://paragonie.com/book/pecl-libsodium/read/00-intro.md#installing-libsodium)
 
+The Halite PHP library should be installed using Composer, by employing
+a tool such as Composer Manager or Composer Merge Plugin, or by adding
+the Sodium module or Halite library to the require section of your project's
+root composer.json file.
+
 ## Using Sodium in Encrypt
 
 Once everything is installed and operational, do the following:
