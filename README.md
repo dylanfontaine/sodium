@@ -16,9 +16,9 @@ Halite library.
 
 Whew! That's a lot of requirements.
 
-It sounds more complicated than it actually is. Here's more information
-about installing the Libsodium library and Libsodium PHP extension:
-[https://paragonie.com/book/pecl-libsodium/read/00-intro.md#installing-libsodium](https://paragonie.com/book/pecl-libsodium/read/00-intro.md#installing-libsodium)
+It sounds more complicated than it actually is. There are excellent
+[instructions](https://paragonie.com/book/pecl-libsodium/read/00-intro)
+for installing the Libsodium library and Libsodium PHP extension.
 
 The Halite PHP library should be installed using Composer, by employing
 a tool such as Composer Manager or Composer Merge Plugin, or by adding
