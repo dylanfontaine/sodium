@@ -11,7 +11,8 @@ use Drupal\encrypt\EncryptionMethodInterface;
 use Drupal\encrypt\Plugin\EncryptionMethod\EncryptionMethodBase;
 use ParagonIE\Halite\Symmetric\EncryptionKey;
 use ParagonIE\Halite\Symmetric\Crypto;
-use ParagonIE\Halite\Alerts as CryptoException;
+use ParagonIE\Halite\Alerts\InvalidKey;
+use ParagonIE\Halite\Alerts\HaliteAlert;
 
 /**
  * Adds an encryption method that uses Libsodium for cryptographic operations.
@@ -48,7 +49,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
     try {
       $encryption_key = new EncryptionKey($key);
     }
-    catch (CryptoException\InvalidKey $e) {
+    catch (InvalidKey $e) {
       drupal_set_message($this->t('Encryption failed because the key is not the correct size.'), 'error');
       return FALSE;
     }
@@ -57,7 +58,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
     try {
       $encrypted_data = Crypto::encrypt($text, $encryption_key, TRUE);
     }
-    catch (CryptoException\HaliteAlert $e) {
+    catch (HaliteAlert $e) {
       drupal_set_message($this->t('Encryption failed due to an unknown error.'), 'error');
     }
 
@@ -74,7 +75,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
     try {
       $encryption_key = new EncryptionKey($key);
     }
-    catch (CryptoException\InvalidKey $e) {
+    catch (InvalidKey $e) {
       drupal_set_message($this->t('Decryption failed because the key is not the correct size.'), 'error');
       return FALSE;
     }
@@ -83,7 +84,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
     try {
       $decrypted_data = Crypto::decrypt($text, $encryption_key, TRUE);
     }
-    catch (CryptoException\HaliteAlert $e) {
+    catch (HaliteAlert $e) {
       drupal_set_message($this->t('Decryption failed due to an unknown error.'), 'error');
     }
 
