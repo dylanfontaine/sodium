@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\sodium\Plugin\EncryptionMethod\SodiumEncryptionMethod.
- */
-
 namespace Drupal\sodium\Plugin\EncryptionMethod;
 
 use Drupal\encrypt\EncryptionMethodInterface;
