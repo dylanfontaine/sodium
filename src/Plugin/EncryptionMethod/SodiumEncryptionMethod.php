@@ -38,14 +38,11 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
    * {@inheritdoc}
    */
   public function encrypt($text, $key) {
-    $encrypted_data = FALSE;
-
     // Create the key object.
     try {
       $encryption_key = new EncryptionKey($key);
     }
     catch (InvalidKey $e) {
-      drupal_set_message($this->t('Encryption failed because the key is not the correct size.'), 'error');
       return FALSE;
     }
 
@@ -54,7 +51,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       $encrypted_data = Crypto::encrypt($text, $encryption_key, TRUE);
     }
     catch (HaliteAlert $e) {
-      drupal_set_message($this->t('Encryption failed due to an unknown error.'), 'error');
+      return FALSE;
     }
 
     return $encrypted_data;
@@ -64,14 +61,11 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
    * {@inheritdoc}
    */
   public function decrypt($text, $key) {
-    $decrypted_data = FALSE;
-
     // Create the key object.
     try {
       $encryption_key = new EncryptionKey($key);
     }
     catch (InvalidKey $e) {
-      drupal_set_message($this->t('Decryption failed because the key is not the correct size.'), 'error');
       return FALSE;
     }
 
@@ -80,7 +74,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       $decrypted_data = Crypto::decrypt($text, $encryption_key, TRUE);
     }
     catch (HaliteAlert $e) {
-      drupal_set_message($this->t('Decryption failed due to an unknown error.'), 'error');
+      return FALSE;
     }
 
     return $decrypted_data;
