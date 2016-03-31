@@ -1,7 +1,14 @@
 <?php
 
 /**
+ * @file
+ * Defines installation functions for Sodium.
+ */
+
+/**
  * Implements hook_requirements().
+ *
+ * Verifies that module requirements are met.
  */
 function sodium_requirements($phase) {
   $requirements = [];
