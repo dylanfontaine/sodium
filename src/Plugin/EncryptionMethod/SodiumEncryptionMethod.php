@@ -3,6 +3,7 @@
 namespace Drupal\sodium\Plugin\EncryptionMethod;
 
 use Drupal\encrypt\EncryptionMethodInterface;
+use Drupal\encrypt\Exception\EncryptException;
 use Drupal\encrypt\Plugin\EncryptionMethod\EncryptionMethodBase;
 use ParagonIE\Halite\Symmetric\EncryptionKey;
 use ParagonIE\Halite\Symmetric\Crypto;
@@ -51,7 +52,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       $encrypted_data = Crypto::encrypt($text, $encryption_key, TRUE);
     }
     catch (HaliteAlert $e) {
-      return FALSE;
+      throw new EncryptException($e);
     }
 
     return $encrypted_data;
@@ -74,7 +75,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       $decrypted_data = Crypto::decrypt($text, $encryption_key, TRUE);
     }
     catch (HaliteAlert $e) {
-      return FALSE;
+      throw new EncryptException($e);
     }
 
     return $decrypted_data;
