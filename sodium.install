@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * Implements hook_requirements().
+ */
+function sodium_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'install') {
+    // Verify that the PHP version is at least 5.6.
+    if (PHP_VERSION_ID < 50600) {
+      $requirements['php_version'] = [
+        'description' => t('Sodium requires PHP version 5.6 or greater.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+
+    // Verify that the Libsodium PHP extension is loaded.
+    if (!extension_loaded('libsodium')) {
+      $requirements['libsodium_extension'] = [
+        'description' => t('Sodium requires the Libsodium PHP extension.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+
+    // Verify that the Halite PHP library is available.
+    if (!class_exists('\ParagonIE\Halite\Halite')) {
+      $requirements['halite_library'] = [
+        'description' => t('Sodium requires the Halite PHP library.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+
+    if (!empty($requirements)) {
+      $requirements['sodium_install_errors'] = [
+        'description' => t("Sodium could not be installed due to missing requirements. See the module's documentation for more information."),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  return $requirements;
+}
