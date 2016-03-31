@@ -29,7 +29,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
     $errors = array();
 
     if (!class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
-      $errors[] = t('Halite PHP library is not installed.');
+      $errors[] = $this->t('Halite PHP library is not installed.');
     }
 
     return $errors;
