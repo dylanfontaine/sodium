@@ -44,7 +44,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       $encryption_key = new EncryptionKey($key);
     }
     catch (InvalidKey $e) {
-      return FALSE;
+      throw new EncryptException($e);
     }
 
     // Encrypt the data.
@@ -67,7 +67,7 @@ class SodiumEncryptionMethod extends EncryptionMethodBase implements EncryptionM
       $encryption_key = new EncryptionKey($key);
     }
     catch (InvalidKey $e) {
-      return FALSE;
+      throw new EncryptException($e);
     }
 
     // Decrypt the data.
