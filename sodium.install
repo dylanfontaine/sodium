@@ -2,49 +2,66 @@
 
 /**
  * @file
- * Defines installation functions for Sodium.
+ * Holds installation hooks for Sodium.
  */
 
 /**
  * Implements hook_requirements().
- *
- * Verifies that module requirements are met.
  */
 function sodium_requirements($phase) {
-  $requirements = [];
+  $requirements = array();
 
+  $t = get_t();
   if ($phase == 'install') {
-    // Verify that the PHP version is at least 5.6.
-    if (PHP_VERSION_ID < 50600) {
-      $requirements['php_version'] = [
-        'description' => t('Sodium requires PHP version 5.6 or greater.'),
-        'severity' => REQUIREMENT_ERROR,
-      ];
+  // Verify that the PHP version is at least 5.6.
+    if (version_compare(phpversion(), '5.6', '>=')) {
+      $requirements['sodium_phpversion'] = array(
+        'title' => $t('Sodium'),
+        'value' => phpversion(),
+        'description' => $t('The PHP version requirement is met. The server is using PHP version !phpversion.', array('!phpversion' => phpversion())),
+        'severity' => REQUIREMENT_OK,
+      );
     }
-
+    else {
+      $requirements['sodium_phpversion'] = array(
+        'title' => $t('Sodium'),
+        'value' => phpversion(),
+        'description' => $t('The PHP version requirement is NOT met. The server is using PHP version !phpversion, but 5.6 is the minimum required to make Sodium work properly.', array('!phpversion' => phpversion())),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
     // Verify that the Libsodium PHP extension is loaded.
-    if (!extension_loaded('libsodium')) {
-      $requirements['libsodium_extension'] = [
-        'description' => t('Sodium requires the Libsodium PHP extension.'),
-        'severity' => REQUIREMENT_ERROR,
-      ];
+    if (extension_loaded('libsodium')) {
+      $requirements['libsodium_extension'] = array(
+        'severity' => REQUIREMENT_OK,
+      );
     }
-
-    // Verify that the Halite PHP library is available.
-    if (!class_exists('\ParagonIE\Halite\Halite')) {
-      $requirements['halite_library'] = [
-        'description' => t('Sodium requires the Halite PHP library.'),
+    else {
+      $requirements['libsodium_extension'] = array(
+        'description' => $t('Sodium cannot be installed. The libsodium PHP extension is missing. Check the <a href="@url">PHP libsodium documentation</a> for information on how to correct this.', array('@url' => 'https://pecl.php.net/package/libsodium')),
         'severity' => REQUIREMENT_ERROR,
-      ];
-    }
-
-    if (!empty($requirements)) {
-      $requirements['sodium_install_errors'] = [
-        'description' => t("Sodium could not be installed due to missing requirements. See the module's documentation for more information."),
-        'severity' => REQUIREMENT_ERROR,
-      ];
+      );
     }
   }
-
+  // Verify that the Halite PHP library is available via composer manager
+  if ($phase == 'runtime') {
+    if (class_exists('\ParagonIE\Halite\Halite')) {
+      $requirements['halite_library'] = array(
+        'title' => $t('Halite Library'),
+        'value' => $t('OK'),
+        'description' => $t('Congrats, the Halite library dependency is met.'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    else {
+      $requirements['halite_library'] = array(
+        'title' => $t('Halite Library'),
+        'value' => $t('Not Found'),
+        'description' => $t('Error: The Halite Library is not found. Check that !cmlink works, and re-enable Sodium afterwards.', array('!cmlink' => l($t('Composer Manager'), 'admin/config/system/composer-manager'))),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
   return $requirements;
 }
+

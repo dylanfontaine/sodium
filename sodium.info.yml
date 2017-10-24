@@ -1,7 +1,0 @@
-name: Sodium
-description: "Allows data to be encrypted and decrypted using Libsodium."
-core: 8.x
-type: module
-package: Security
-dependencies:
-  - encrypt

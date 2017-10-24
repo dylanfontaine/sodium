@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Module file for sodium_module.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function sodium_libraries_info() {
+  return array(
+    'halite' => array(
+      'name' => t('Paragonie/Halite'),
+      'vendor_url' => 'https://github.com/paragonie/halite',
+      'download_url' => 'https://github.com/paragonie/halite/archive/master.zip',
+      'files' => array(
+        'php' => array('autoload.php'),
+      ),
+      'version' => 'master',
+    ),
+  );
+}
+
+/**
+ * Load the halite library.
+ *
+ * @return bool
+ *   TRUE if the library could be loaded, FALSE otherwise.
+ */
+function sodium_load_library() {
+  $library = libraries_load('halite');
+  return !empty($library['loaded']);
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function sodium_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'encrypt') {
+    return 'plugins/' . $plugin;
+  }
+}
