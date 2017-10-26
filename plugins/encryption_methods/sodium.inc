@@ -13,7 +13,7 @@ $plugin = sodium_encrypt_encryption_methods();
 function sodium_encrypt_encryption_methods() {
   return array(
     'title' => t('Sodium'),
-    'description' => t('<a href="@libsodium-url">Libsodium encryption</a> via <a href="@libsodium">the Halite Library</a>. See the Sodium README.txt for details.', array(
+    'description' => t('<a href="@libsodium-url">Libsodium encryption</a> via <a href="@halite-url">the Halite Library</a>. See the Sodium README.txt for details.', array(
       '@libsodium-url' => 'https://github.com/jedisct1/libsodium-php',
       '@halite-url' => 'https://github.com/paragonie/halite',
     )),
