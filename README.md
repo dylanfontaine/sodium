@@ -5,7 +5,7 @@ Drupal 7.x Sodium Module - README
 The Sodium module for Drupal provides an encryption method for the Encrypt
 module that allows symmetric encryption and decryption of data using the
 Sodium (libsodium) software library. PHP integration is provided by the
-Halite library.
+Paragonie/Halite library.
 
 ## Drupal 7 - Sodium Requirements
 
@@ -24,9 +24,8 @@ It sounds more complicated than it actually is. Information about installing
 the Libsodium library and the Libsodium PHP extension can be found in
 ["Using Libsodium in PHP Projects."](https://paragonie.com/book/pecl-libsodium)
 
-The Halite PHP library can be installed using Composer Manager or the Libraries module.
-  * To utilize composer manager, simply run "composer update --no-dev" or similar to fit your environment. This is the recommended setup.
-  * To use the "Libraries" module, place the "halite" library in /sites/all/libraries/
+The Halite PHP library should be installed using Composer Manager. The composer manager module has the option to customize the path where vendor files are loaded. This is useful if your prod server does not allow access out to d.o. or packagist.
+  * To utilize composer manager, simply run "composer update --no-dev --no-ansi --optimize-autoloader" or similar to fit your environment.
 
 ## Using Sodium in Encrypt
 

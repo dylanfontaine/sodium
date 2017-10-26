@@ -45,7 +45,7 @@ function sodium_requirements($phase) {
   }
   // Verify that the Halite PHP library is available via composer manager
   if ($phase == 'runtime') {
-    if (class_exists('\ParagonIE\Halite\Halite')) {
+    if (class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
       $requirements['halite_library'] = array(
         'title' => $t('Halite Library'),
         'value' => $t('OK'),

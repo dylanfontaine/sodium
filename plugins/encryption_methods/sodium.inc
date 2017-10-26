@@ -42,25 +42,22 @@ function _sodium_encryption_methods_sodium($op, $text, $key, $options = array())
     if (!$disable_base64) {
        $text = base64_decode($text);
     }
-    if (sodium_load_library()) {
     // Create the key object.
-      try {
-        $encryption_key = new EncryptionKey($key);
-        }
-        catch (InvalidKey $e) {
-          return FALSE;
-        }
-        try {
-          return Crypto::decrypt($text, $encryption_key);
-        }
-        catch (HaliteAlert $e) {
-          return FALSE;
+    try {
+      $encryption_key = new EncryptionKey($key);
       }
+      catch (InvalidKey $e) {
+        return FALSE;
+      }
+      try {
+        return Crypto::decrypt($text, $encryption_key);
+      }
+      catch (HaliteAlert $e) {
+        return FALSE;
     }
   }
   else {
     $processed_text = '';
-    if (sodium_load_library()) {
     // Create the key object.
       try {
         $encryption_key = new EncryptionKey($key);
@@ -79,20 +76,19 @@ function _sodium_encryption_methods_sodium($op, $text, $key, $options = array())
       if (!$disable_base64) {
         $processed_text = base64_encode($processed_text);
       }
-    }
 
     return $processed_text;
   }
 }
 
 /**
- * Callback to check if Sodium is enabled, and the library has been installed.
+ * Callback to check requirements status
  */
 function _sodium_check_requirements() {
   $errors = array();
-
-  if (!function_exists('sodium_load_library')) {
-    $errors[] = t('Sodium module is not installed.');
+  // Check if the libsodium php extension and the halite library are loaded
+  if (!extension_loaded('libsodium')) {
+    $errors[] = t('Libsodium PHP extension is not installed.');
   }
   elseif (!class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
     $errors[] = t('Halite library not installed. Check composer manager to verify the library is installed');
