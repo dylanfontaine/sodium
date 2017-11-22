@@ -16,7 +16,7 @@ Paragonie/Halite library.
 * [Encrypt module](https://www.drupal.org/project/encrypt)
 
 ## RECOMMENDED MODULES
-* [Key module](https://www.drupal.org/project/key) - Allows creating a key file with a custom path and file name. The encrypt module hard codes the key's file name to encrypt_key.key
+* [Key module](https://www.drupal.org/project/key) - Allows creating a key file with a custom path and file name. The encrypt module hard codes the key's file name to encrypt_key.key.
 
 Whew! That's a lot of requirements.
 
