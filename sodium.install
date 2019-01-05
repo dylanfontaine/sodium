@@ -13,8 +13,8 @@ function sodium_requirements($phase) {
 
   $t = get_t();
   if ($phase == 'install') {
-  // Verify that the PHP version is at least 5.6.
-    if (version_compare(phpversion(), '5.6', '>=')) {
+  // Verify that the PHP version is at least 7.1.
+    if (version_compare(phpversion(), '7.1', '>=')) {
       $requirements['sodium_phpversion'] = array(
         'title' => $t('Sodium'),
         'value' => phpversion(),
@@ -31,7 +31,7 @@ function sodium_requirements($phase) {
       );
     }
     // Verify that the Libsodium PHP extension is loaded.
-    if (extension_loaded('libsodium')) {
+    if (extension_loaded('libsodium') || extension_loaded('sodium')) {
       $requirements['libsodium_extension'] = array(
         'severity' => REQUIREMENT_OK,
       );

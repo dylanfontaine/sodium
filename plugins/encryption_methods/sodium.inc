@@ -4,6 +4,7 @@ use ParagonIE\Halite\Symmetric\EncryptionKey;
 use ParagonIE\Halite\Symmetric\Crypto;
 use ParagonIE\Halite\Alerts\InvalidKey;
 use ParagonIE\Halite\Alerts\HaliteAlert;
+use ParagonIE\Halite\HiddenString;
 
 $plugin = sodium_encrypt_encryption_methods();
 
@@ -40,42 +41,45 @@ function _sodium_encryption_methods_sodium($op, $text, $key, $options = array())
   if ($op == 'decrypt') {
       // Check if we are disabling base64 encoding.
     if (!$disable_base64) {
-       $text = base64_decode($text);
+      $text = base64_decode($text);
     }
     // Create the key object.
     try {
+      $key = new HiddenString($key);
       $encryption_key = new EncryptionKey($key);
-      }
-      catch (InvalidKey $e) {
-        return FALSE;
-      }
-      try {
-        return Crypto::decrypt($text, $encryption_key);
-      }
-      catch (HaliteAlert $e) {
-        return FALSE;
+    }
+    catch (InvalidKey $e) {
+      return FALSE;
+    }
+    try {
+      return Crypto::decrypt($text, $encryption_key)->getString();
+    }
+    catch (HaliteAlert $e) {
+      return FALSE;
     }
   }
   else {
     $processed_text = '';
     // Create the key object.
-      try {
-        $encryption_key = new EncryptionKey($key);
-      }
-      catch (InvalidKey $e) {
-        return FALSE;
-      }
-      // Encrypt.
-      try {
-        $processed_text = Crypto::encrypt($text, $encryption_key);
-      }
-      catch (HaliteAlert $e) {
-        return FALSE;
-      }
-      // Check if we are disabling base64 encoding.
-      if (!$disable_base64) {
-        $processed_text = base64_encode($processed_text);
-      }
+    try {
+      $key = new HiddenString($key);
+      $encryption_key = new EncryptionKey($key);
+    }
+    catch (InvalidKey $e) {
+      return FALSE;
+    }
+    // Encrypt.
+    try {
+      $message = new HiddenString($text);
+      $processed_text = Crypto::encrypt($message, $encryption_key);
+    }
+    catch (HaliteAlert $e) {
+      return FALSE;
+    }
+    // Check if we are disabling base64 encoding.
+    if (!$disable_base64) {
+      $processed_text = base64_encode($processed_text);
+    }
 
     return $processed_text;
   }
@@ -87,11 +91,13 @@ function _sodium_encryption_methods_sodium($op, $text, $key, $options = array())
 function _sodium_check_requirements() {
   $errors = array();
   // Check if the libsodium php extension and the halite library are loaded
-  if (!extension_loaded('libsodium')) {
+  if (extension_loaded('libsodium') || extension_loaded('sodium')) {
+    if (!class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
+      $errors[] = t('Halite library not installed. Check composer manager to verify the library is installed');
+    }
+  }  
+  else {
     $errors[] = t('Libsodium PHP extension is not installed.');
-  }
-  elseif (!class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
-    $errors[] = t('Halite library not installed. Check composer manager to verify the library is installed');
   }
 
   return $errors;
