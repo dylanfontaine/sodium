@@ -15,6 +15,6 @@
         "source": "https://cgit.drupalcode.org/sodium"
     },
     "require": {
-        "paragonie/halite": "^3"
+        "paragonie/halite": ">3"
     }
 }
