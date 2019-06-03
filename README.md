@@ -24,7 +24,7 @@ It sounds more complicated than it actually is. Information about installing
 the Libsodium library and the Libsodium PHP extension can be found in
 ["Using Libsodium in PHP Projects."](https://paragonie.com/book/pecl-libsodium)
 
-The Halite PHP library should be installed using Composer Manager. The composer manager module has the option to customize the path where vendor files are loaded. This is useful if your prod server does not allow access out to d.o. or packagist.
+The Halite PHP library can be installed using Composer Manager. The composer manager module has the option to customize the path where vendor files are loaded. This is useful if your prod server does not allow access out to d.o. or packagist.
   * To utilize composer manager, simply run "composer update --no-dev --no-ansi --optimize-autoloader" or similar to fit your environment.
 
 ## Using Sodium in Encrypt

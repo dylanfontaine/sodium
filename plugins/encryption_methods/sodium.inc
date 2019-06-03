@@ -93,9 +93,9 @@ function _sodium_check_requirements() {
   // Check if the libsodium php extension and the halite library are loaded
   if (extension_loaded('libsodium') || extension_loaded('sodium')) {
     if (!class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
-      $errors[] = t('Halite library not installed. Check composer manager to verify the library is installed');
+      $errors[] = t('Halite library not installed. Verify the library is installed');
     }
-  }  
+  }
   else {
     $errors[] = t('Libsodium PHP extension is not installed.');
   }

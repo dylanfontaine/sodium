@@ -43,7 +43,7 @@ function sodium_requirements($phase) {
       );
     }
   }
-  // Verify that the Halite PHP library is available via composer manager
+  // Verify that the Halite PHP library is available.
   if ($phase == 'runtime') {
     if (class_exists('\ParagonIE\Halite\Symmetric\Crypto')) {
       $requirements['halite_library'] = array(
@@ -57,7 +57,7 @@ function sodium_requirements($phase) {
       $requirements['halite_library'] = array(
         'title' => $t('Halite Library'),
         'value' => $t('Not Found'),
-        'description' => $t('Error: The Halite Library is not found. Check that !cmlink works, and re-enable Sodium afterwards.', array('!cmlink' => l($t('Composer Manager'), 'admin/config/system/composer-manager'))),
+        'description' => $t('Error: The Halite Library is not found. Check that it is installed, and re-enable Sodium afterwards.'),
         'severity' => REQUIREMENT_ERROR,
       );
     }
